@@ -1,5 +1,3 @@
-# Heat method on a triangulated surface with a user metric G (defaults to identity)
-# Uses: pathlib, os, numpy, scipy, trimesh, matplotlib
 from pathlib import Path
 import os
 import numpy as np
@@ -696,7 +694,7 @@ def trace_geodesic_polyline_metric(mesh, V, F, phi, grads, X, Y, Ginv2,
 # Main
 # --------------------------
 def main():
-    obj_path = Path("C:/Users/jdkg7/Documents/Python/Metric Modification/torus.obj")
+    obj_path = Path(r"EDIT")  # ---- ADD PATH TO TRIANGULATED MESH HERE
 
     # Load & primitives
     mesh, V, F = load_mesh(obj_path)
@@ -779,4 +777,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
