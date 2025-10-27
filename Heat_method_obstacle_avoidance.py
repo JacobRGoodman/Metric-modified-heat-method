@@ -1,14 +1,8 @@
-# Build a per-face metric G2 = I + (∇f)(∇f)^T from a bump f based on distance to an obstacle.
-# Reuses helpers from your metric-ready heat method module:
-#   Heat.load_mesh, Heat.build_primitives, Heat.assemble_operators,
-#   Heat.heat_distance_auto_metric, Heat.distance_at_point, Heat.nearest_vertex, etc.
-
 from pathlib import Path
 import numpy as np
 import trimesh
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-
 import Heat_method_distance as Heat 
 
 
@@ -104,7 +98,7 @@ def main():
     # -----------------------
     # 0) Load mesh & primitives
     # -----------------------
-    obj_path = Path("C:/Users/jdkg7/Documents/Python/Metric Modification/torus.obj")
+    obj_path = Path(r"PATH")  # --- ADD PATH TO OBJECT HERE
     mesh, V, F = Heat.load_mesh(obj_path)
     A, grads, X, Y, h = Heat.build_primitives(mesh, V, F)
 
@@ -116,9 +110,9 @@ def main():
     # -----------------------
     # 1) Set guesses & project to surface
     # -----------------------
-    src_rough = np.array([0.8, -0.2, -0.])
-    tgt_rough = np.array([-1.1, -0.5, -0.3])
-    obs_rough = np.array([0.1, -0.9, -0.1])
+    src_rough = np.array([0.8, -0.2, -0.])    # --- SOURCE POINT
+    tgt_rough = np.array([-1.1, -0.5, -0.3])   # --- TARGET POINT
+    obs_rough = np.array([0.1, -0.9, -0.1])   # --- POINT OBSTACLE
 
     prox = trimesh.proximity.ProximityQuery(mesh)
 
@@ -140,7 +134,6 @@ def main():
     )
 
     # Build per-vertex samples of f: s_i = M/(1+(phi_i/D)^2)
-    # Double torus: M = 4, D = 0.6, k = 2
     # Single tours: M = 0.8, D = 0.1, k = 2  (Same homotopy class)
     # Single torus: M = 2, D = 0.4, k = 2  (same leg)
     # Single torus: M = 4, D = 0.7, k = 2 (opposite leg)
@@ -308,4 +301,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
